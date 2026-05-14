@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2cd51725d9d57654a9766841f8b35f61
+guid: b570606c6a78d6846bf37c972998b2a1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: _05BeachCosmeticsAtlas_mat
-    second: {fileID: 2100000, guid: 6305481500635db4cb47b86d9c30bb53, type: 2}
+      name: Cylinder002Mat
+    second: {fileID: 2100000, guid: d1756464ebbeb9344a2876180fc56005, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

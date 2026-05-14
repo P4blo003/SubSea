@@ -24,6 +24,8 @@ namespace SubSea.Managers
 
         [Header("References")]
         [SerializeField] private TMP_Text _oxygenText;
+        [SerializeField] private TMP_Text _coinText;
+        
         [SerializeField] private GameObject _gameOverPanel;
         [SerializeField] private Button _restartButton;
 
@@ -34,6 +36,7 @@ namespace SubSea.Managers
         {
             OxygenSystem.Instance.OnOxygenChanged += this.UpdateOxygenUI;
             OxygenSystem.Instance.OnOxygenDepleted += () => this._gameOverPanel.SetActive(true);
+            CoinSystem.Instance.OnCoinsChanged += this.UpdateCoinsUI;
             this._restartButton.onClick.AddListener(this.RestartGame);
         }
 
@@ -46,9 +49,14 @@ namespace SubSea.Managers
             this._oxygenText.text = $"O2: {Mathf.Round(currentOxygen)} / {maxOxygen} ({Mathf.Round(percent)}%)";
         }
 
+        public void UpdateCoinsUI(float currentCoins)
+        {
+            this._coinText.text = $"Coins: {Mathf.Round(currentCoins)} $";
+        }
+
         public void RestartGame()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
         }
     }
 }

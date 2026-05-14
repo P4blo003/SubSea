@@ -17,13 +17,17 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace SubSea.Objects
 {
-    public class OxygenPickup : MonoBehaviour
+    public class CoinChest : MonoBehaviour
     {
-        [Header("Oxygen Settings")]
-        [SerializeField] private float _oxygenAmount = 20f;
-
         [Header("References")]
+        [SerializeField] private GameObject _chestClosedVisual;
+        [SerializeField] private GameObject _chestOpenedVisual;
+
         [SerializeField] private XRSimpleInteractable _simpleInteractable;
+
+        [Header("Coin Settings")]
+        [SerializeField] private int _coinAmount = 10;
+        private bool _wasOpened = false; // Para no sumar dinero infinitamente
 
 
         // ---- Unity ---- //
@@ -39,13 +43,21 @@ namespace SubSea.Objects
             this._simpleInteractable.selectEntered.RemoveListener(OnPickedUp);
         }
 
-
-        // ---- Methods ---- //
-
         private void OnPickedUp(SelectEnterEventArgs args)
         {
-            OxygenSystem.Instance.AddOxygen(this._oxygenAmount);
-            Destroy(gameObject);
+            // Sumar dinero solo la primera vez que se abre
+            if (!this._wasOpened)
+            {
+                this._wasOpened = true;
+
+                this._chestClosedVisual.SetActive(false);
+                this._chestOpenedVisual.SetActive(true);
+            }
+            else
+            {
+                CoinSystem.Instance.AddCoins(this._coinAmount);
+                Destroy(gameObject);
+            }
         }
     }
 }
